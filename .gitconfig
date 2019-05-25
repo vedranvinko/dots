@@ -1,0 +1,67 @@
+[user]
+	name = vedran
+	email = vinkovedran@gmail.com
+[core]
+    editor = vim
+    autocrlf = false
+    safecrlf = false
+    ; whitespace = fix, -indent-with-non-tab,trailing-space,cr-at-eol
+[color]
+    ui = auto
+[color "branch"]
+    current = yellow bold
+    local = green bold
+    remote = cyan bold
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+    whitespace = red reverse
+[color "status"]
+    added = green bold
+    changed = yellow bold
+    untracked = red bold
+[diff]
+    tool = vimdiff
+[difftool]
+    prompt = false
+[alias]
+    b = branch
+    c = commit
+    d = diff
+    dp = diff --patience
+    dc = diff --cached
+    dk = diff --check
+    dck = diff --cached --check
+    dt = difftool
+    dct = difftool --cached
+    f = fetch
+    fo = fetch origin
+    g = grep -p
+    hist = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+    l = log --oneline
+    lg = log --oneline --graph --decorate
+    ls = ls-files
+    m = merge
+    ma = merge --abort
+    mc = merge --continue
+    ms = merge --skip
+    o = checkout
+    ob = checkout -b
+    ps = push
+    pst = push --tags
+    pl = pull
+    pb = pull --rebase
+    plo = pull origin
+    re = reset
+    rh = reset HEAD
+    reh = reset --hard
+    s = status
+    who = shortlog -s --
+[help]
+	autocorrect = 1
+[push]
+	default = simple
+[winUpdater]
+	recentlySeenVersion = 2.15.1.windows.2
