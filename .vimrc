@@ -20,6 +20,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'airblade/vim-gitgutter'
 Plug 'luochen1990/rainbow'
 Plug 'chr4/nginx.vim'
+Plug 'junegunn/vim-easy-align'
 
 " Rust plugin
 if executable('rustc')
@@ -166,3 +167,9 @@ let g:rustfmt_autosave = 1
 
 " Rainbow plugin
 let g:rainbow_active = 1
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
