@@ -21,6 +21,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'luochen1990/rainbow'
 Plug 'chr4/nginx.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'townk/vim-autoclose'
 
 " Rust plugin
 if executable('rustc')
