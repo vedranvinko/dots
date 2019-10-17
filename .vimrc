@@ -38,6 +38,10 @@ filetype plugin indent on
 
 syntax on
 
+" material theme
+" set background=dark
+" colorscheme material-theme
+
 set history=500
 
 let mapleader = ","
