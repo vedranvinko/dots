@@ -41,6 +41,7 @@ syntax on
 " material theme
 " set background=dark
 " colorscheme material-theme
+colorscheme 1989
 
 set history=500
 
