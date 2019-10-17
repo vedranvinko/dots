@@ -24,6 +24,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'townk/vim-autoclose'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
+Plug 'tpope/vim-commentary'
 
 " Rust plugin
 if executable('rustc')
