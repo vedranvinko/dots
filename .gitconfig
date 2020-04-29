@@ -1,11 +1,12 @@
 [user]
-	name = vedran
-	email = vinkovedran@gmail.com
+    name = vedran
+    email = vinkovedran@gmail.com
 [core]
     editor = vim
     autocrlf = false
     safecrlf = false
     ; whitespace = fix, -indent-with-non-tab,trailing-space,cr-at-eol
+    pager = delta --plus-color="#012800" --minus-color="#340001" --theme='Monokai Extended'
 [color]
     ui = auto
 [color "branch"]
@@ -60,8 +61,8 @@
     s = status
     who = shortlog -s --
 [help]
-	autocorrect = 1
+    autocorrect = 1
 [push]
-	default = simple
-[winUpdater]
-	recentlySeenVersion = 2.15.1.windows.2
+    default = simple
+[interactive]
+    diffFilter = delta --color-only
