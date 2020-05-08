@@ -7,24 +7,18 @@ set nocompatible
 
 filetype off
 
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
 call plug#begin('~/vim/plugged')
 
 " General plugins
-Plug 'scrooloose/nerdtree'
 Plug 'airblade/vim-gitgutter'
-Plug 'luochen1990/rainbow'
 Plug 'chr4/nginx.vim'
-Plug 'junegunn/vim-easy-align'
-Plug 'townk/vim-autoclose'
-Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'luochen1990/rainbow'
+Plug 'scrooloose/nerdtree'
+Plug 'townk/vim-autoclose'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 
 " Rust plugin
@@ -38,9 +32,6 @@ filetype plugin indent on
 
 syntax on
 
-" material theme
-" set background=dark
-" colorscheme material-theme
 colorscheme 1989
 
 set history=500
@@ -53,26 +44,27 @@ nmap <leader>w :w!<cr>
 " :W sudo saves the file
 command W w !sudo tee % > /dev/null
 
-set showmode                    " show mode we're currently in
-set nowrap                      " don't wrap lines
-set tabstop=2                   " 2 spaces
-set softtabstop=2               " when hitting <BS>, pretend like a tab is removed, even if spaces
-set expandtab                   " expand tabs
-set shiftwidth=2                " spaces for autoindenting
-set shiftround                  " use multiple of shiftwidth when indenting with '<' and '>'
-set backspace=indent,eol,start  " allow backspacing over everything in insert mode
-set autoindent                  " autoindenting on
-set copyindent                  " copy the previous indentation on autoindenting
-set number                      " show line numbers
-set showmatch                   " show matching parenthesis
-set ignorecase                  " ignore case when searching
-set smartcase                   " ignore case if search pattern is all lowercase,
-                                " case-sensitive otherwise
-set smarttab                    " insert tabs on the start of a line according to
-                                " shiftwidth, not tabstop
-set scrolloff=4                 " keep 4 lines off the edges of the screen when scrolling
-set hlsearch                    " highlight search terms
-set incsearch                   " show search matches as you type
+set showmode                   " show mode we're currently in
+set nowrap                     " don't wrap lines
+set tabstop=2                  " 2 spaces
+set softtabstop=2              " when hitting <BS>, pretend like a tab is removed, even if spaces
+set expandtab                  " expand tabs
+set shiftwidth=2               " spaces for autoindenting
+set shiftround                 " use multiple of shiftwidth when indenting with '<' and '>'
+set backspace=indent,eol,start " allow backspacing over everything in insert mode
+set autoindent                 " autoindenting on
+set copyindent                 " copy the previous indentation on autoindenting
+set number                     " show line numbers
+set showmatch                  " show matching parenthesis
+set ignorecase                 " ignore case when searching
+set smartcase                  " ignore case if search pattern is all lowercase,
+                               " case-sensitive otherwise
+set smarttab                   " insert tabs on the start of a line according to
+                               " shiftwidth, not tabstop
+set scrolloff=4                " keep 4 lines off the edges of the screen when scrolling
+set hlsearch                   " highlight search terms
+set incsearch                  " show search matches as you type
+nnoremap <leader><space> :nohlsearch<CR> " turn off search highlight
 set nolist                      " don't show invisible characters by default
 set pastetoggle=<F2>            " when in insert mode, press <F2> to go to paste mode
 
@@ -183,3 +175,13 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+" Insert \v as a first char in searching; disable Vim regex
+nnoremap / /\v
+vnoremap / /\v
+
+" set replace global; :%s/foo/bar/ instead of :%s/foo/bar/g
+set gdefault
+
+" toggle gundo
+nnoremap <leader>u :GundoToggle<CR>
