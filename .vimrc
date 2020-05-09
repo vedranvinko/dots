@@ -4,14 +4,16 @@
 "
 
 set nocompatible
-
 filetype off
 
 call plug#begin('~/vim/plugged')
 
-" General plugins
 Plug 'airblade/vim-gitgutter'
+Plug 'bling/vim-bufferline'
 Plug 'chr4/nginx.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/gv.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'luochen1990/rainbow'
@@ -21,7 +23,6 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 
-" Rust plugin
 if executable('rustc')
   Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 endif
@@ -29,12 +30,53 @@ endif
 call plug#end()
 
 filetype plugin indent on
-
 syntax on
-
 colorscheme 1989
 
+set autoindent
+set autoread
+set backspace=indent,eol,start
+set clipboard=unnamed
+set cmdheight=2
+set copyindent
+set encoding=utf-8
+set expandtab
+set gdefault
+set hidden
 set history=500
+set hlsearch
+set ignorecase
+set incsearch
+set laststatus=2
+set lazyredraw
+set magic
+set nobackup
+set nocursorline
+set noerrorbells
+set nolist
+set nomodeline
+set noshowmode
+set noswapfile
+set nowrap
+set number
+set pastetoggle=<F2>
+set ruler
+set scrolloff=4
+set shiftround
+set shiftwidth=2
+set shortmess+=I
+set showcmd
+set showmatch
+set smartcase
+set smarttab
+set softtabstop=2
+set tabstop=2
+set ttyfast
+set undolevels=1000
+set visualbell
+set wildignore=*.swp,*.bak,*.pyc,*.o
+set wildmenu
+set wildmode=list:full
 
 let mapleader = ","
 let g:mapleader = ","
@@ -44,34 +86,17 @@ nmap <leader>w :w!<cr>
 " :W sudo saves the file
 command W w !sudo tee % > /dev/null
 
-set showmode                   " show mode we're currently in
-set nowrap                     " don't wrap lines
-set tabstop=2                  " 2 spaces
-set softtabstop=2              " when hitting <BS>, pretend like a tab is removed, even if spaces
-set expandtab                  " expand tabs
-set shiftwidth=2               " spaces for autoindenting
-set shiftround                 " use multiple of shiftwidth when indenting with '<' and '>'
-set backspace=indent,eol,start " allow backspacing over everything in insert mode
-set autoindent                 " autoindenting on
-set copyindent                 " copy the previous indentation on autoindenting
-set number                     " show line numbers
-set showmatch                  " show matching parenthesis
-set ignorecase                 " ignore case when searching
-set smartcase                  " ignore case if search pattern is all lowercase,
-                               " case-sensitive otherwise
-set smarttab                   " insert tabs on the start of a line according to
-                               " shiftwidth, not tabstop
-set scrolloff=4                " keep 4 lines off the edges of the screen when scrolling
-set hlsearch                   " highlight search terms
-set incsearch                  " show search matches as you type
-nnoremap <leader><space> :nohlsearch<CR> " turn off search highlight
-set nolist                      " don't show invisible characters by default
-set pastetoggle=<F2>            " when in insert mode, press <F2> to go to paste mode
+" Use hjkl keys
+noremap <up> <nop>
+noremap <down> <nop>
+noremap <left> <nop>
+noremap <right> <nop>
+nnoremap j gj
+nnoremap k gk
 
-set shortmess+=I                " hide the launch screen
-set clipboard=unnamed           " normal OS clipboard interaction
-set autoread                    " automatically reload files changed outside of Vim
-set magic                       " For regular expressions turn magic on
+" Insert \v as a first char in searching; disable Vim regex
+nnoremap / /\v
+vnoremap / /\v
 
 " Toggle show/hide invisible chars
 nnoremap <leader>i :set list!<cr>
@@ -79,51 +104,52 @@ nnoremap <leader>i :set list!<cr>
 " Toggle line numbers
 nnoremap <leader>N :setlocal number!<cr>
 
-set encoding=utf-8
-set lazyredraw                  " don't update the display while executing macros
-set laststatus=2                " show the status line
-set cmdheight=2                 "
-set hidden                      " hide buffers
-set undolevels=1000             " undo level
-set nobackup                    " do not keep backup files
-set noswapfile                  " do not write swap files
-set wildmenu                    " make tab completion for files/buffers act like bash
-set wildmode=list:full          " show a list when pressing tab
+" Discard search
+nnoremap <leader><space> :nohlsearch<CR>
 
-set wildignore=*.swp,*.bak,*.pyc,*.o
+" Strip all trailing whitespace from a file, using ,W
+nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
 
-set visualbell                  " don't beep
-set noerrorbells                " don't beep
-set showcmd                     " show (partial) command in the last line of the screen
-set nomodeline                  " disable mode lines (security measure)
-set ttyfast                     " always use a fast terminal
-"set cursorline                 " underline the current line, for quick orientation
-set nocursorline
-set ruler
+" Quickly close the current window
+nnoremap <leader>Q :q<CR>
 
-nnoremap <leader>Q :q<CR>       " Quickly close the current window
-nnoremap <leader>q :bd<CR>      " Quickly close the current buffer
+" Quickly close the current buffer
+nnoremap <leader>q :bd<CR>      
 
 " Sort paragraphs
 vnoremap <leader>s !sort -f<CR>gv
 nnoremap <leader>s vip!sort -f<CR><Esc>
 
-" Use hjkl keys
-noremap <up> <nop>
-noremap <down> <nop>
-noremap <left> <nop>
-noremap <right> <nop>
-
-nnoremap j gj
-nnoremap k gk
+" Insert date - Oct 8, 2018
+nnoremap <leader>fd "=strftime("%b %d, %Y")<CR>p
 
 " Jump to matching pairs easily, with Tab
 nnoremap <Tab> %
 vnoremap <Tab> %
 
-" Strip all trailing whitespace from a file, using ,W
-nnoremap <leader>W :%s/\s\+$//<CR>:let @/=''<CR>
+" C-U in insert/normal mode, to uppercase the word under cursor
+inoremap <c-u> <esc>viwUea
+nnoremap <c-u> viwUe
 
+" Quote words under cursor
+nnoremap <leader>" viW<esc>a"<esc>gvo<esc>i"<esc>gvo<esc>3l
+nnoremap <leader>' viW<esc>a'<esc>gvo<esc>i'<esc>gvo<esc>3l
+
+" auto reload vimrc when editing it
+" autocmd! bufwritepost .vimrc source ~/.vimrc
+au FileType Makefile set noexpandtab
+
+" Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+" Manage tabs
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
+map <leader>t<leader> :tabnext
+
+" NERDTree
 " Open NERDTree if vim starts with no files
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
@@ -138,50 +164,19 @@ let NERDTreeShowHidden=1
 " Highlight the selected entry in the tree
 let NERDTreeHighlightCursorline=1
 
-" C-U in insert/normal mode, to uppercase the word under cursor
-inoremap <c-u> <esc>viwUea
-nnoremap <c-u> viwUe
-
-" Quote words under cursor
-nnoremap <leader>" viW<esc>a"<esc>gvo<esc>i"<esc>gvo<esc>3l
-nnoremap <leader>' viW<esc>a'<esc>gvo<esc>i'<esc>gvo<esc>3l
-
-" auto reload vimrc when editing it
-" autocmd! bufwritepost .vimrc source ~/.vimrc
-
-au FileType Makefile set noexpandtab
-
-" Switch CWD to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
-
-" Manage tabs
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove
-map <leader>t<leader> :tabnext
-
-" Insert date - Oct 8, 2018
-nnoremap <leader>fd "=strftime("%b %d, %Y")<CR>p
-
 " Rust
 let g:rustfmt_autosave = 1
 
 " Rainbow plugin
 let g:rainbow_active = 1
 
+" EasyAlign
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-" Insert \v as a first char in searching; disable Vim regex
-nnoremap / /\v
-vnoremap / /\v
-
-" set replace global; :%s/foo/bar/ instead of :%s/foo/bar/g
-set gdefault
-
-" toggle gundo
-nnoremap <leader>u :GundoToggle<CR>
+" fzf
+" Always enable preview window on the right with 60% width
+let g:fzf_preview_window = 'right:60%'
