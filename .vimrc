@@ -22,6 +22,7 @@ Plug 'townk/vim-autoclose'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 if executable('rustc')
   Plug 'rust-lang/rust.vim', { 'for': 'rust' }
