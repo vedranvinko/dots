@@ -7,4 +7,4 @@ alias icat="kitty +kitten icat"
 alias http="sudo docker run -ti --rm vedranvinko/httpie"
 alias tl="tldr --list | fzf --preview 'tldr {} --color always' | xargs tldr"
 alias pls='sudo $(fc -ln -1)'
-alias gg='/usr/games/fortune -n 1 | /usr/games/cowsay -n'
+alias gg='/usr/games/fortune -n 1 | /usr/games/cowsay -n | lolcat'
