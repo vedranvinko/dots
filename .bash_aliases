@@ -13,3 +13,4 @@ alias igob='cd - > /dev/null; echo -e "You were in: $OLDPWD\nNow you are in: $PW
 alias xo='xdg-open .'
 alias stripcomments='grep -v ^$ | grep -v ^#'
 alias sc=stripcomments
+alias fzfp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
